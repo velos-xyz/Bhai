@@ -15,7 +15,10 @@ let globals = {
 };
 
 function createWindow() {
-    const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize
+    const {
+        width,
+        height
+    } = electron.screen.getPrimaryDisplay().workAreaSize
 
     const win = new BrowserWindow({
         width,
