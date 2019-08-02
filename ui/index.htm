@@ -2,13 +2,18 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- <title>Hello World!</title> -->
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  
+    <section class="main">
+      <textarea class="paste" rows="1" placeholder="Write stuff here and press enter."></textarea>
+      <div class="name-container">
+        as: <a class="name"></a>
+      </div>
+    </section>
+    
+    <script src="libs/autosize.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

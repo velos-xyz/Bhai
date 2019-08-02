@@ -1,18 +1,27 @@
 const electron = require('electron');
 const hotkeys = require('./app/hotkeys');
+const coms = require('./app/coms');
 
 const {
     app,
     BrowserWindow,
     Tray,
     Menu,
-    MenuItem
+    MenuItem,
+    ipcMain
 } = require('electron');
 
 let globals = {
     window: null,
     tray: null
 };
+
+function showWindow() {
+    globals.window.show();
+    globals.window.focus();
+    globals.window.webContents.send('showing');
+    globals.window.webContents.send('name', coms.getName());
+}
 
 function createWindow() {
     const {
@@ -28,12 +37,15 @@ function createWindow() {
         title: "Bhai",
         minimizable: false,
         maximizable: false,
-        alwaysOnTop: true,
+        alwaysOnTop: false,
         autoHideMenuBar: true,
         darkTheme: true,
         show: false,
         icon: 'res/tray.png',
-        closable: false
+        closable: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     win.setMenu(null);
@@ -53,6 +65,8 @@ function createWindow() {
 
     win.loadFile('ui/index.htm');
 
+    win.webContents.openDevTools();
+
     globals.window = win;
 }
 
@@ -68,8 +82,7 @@ app.on('ready', () => {
         new MenuItem({
             label: 'Open',
             click: () => {
-                globals.window.show();
-                globals.window.focus();
+                showWindow();
             }
         }
     ));
@@ -94,4 +107,16 @@ app.on('window-all-closed', () => {
     createWindow();
 });
 
-hotkeys(globals);
+hotkeys(globals, showWindow);
+
+ipcMain.on('name', (ev, name) => {
+    coms.setName(name);
+});
+
+ipcMain.on('list', (ev, name) => {
+    globals.window.webContents.send('list', JSON.stringify(coms.get()));
+});
+
+coms.bus.on('new', share => {
+    globals.window.webContents.send('new', JSON.stringify(share));
+});

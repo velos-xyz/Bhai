@@ -1,5 +1,42 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
 html {
     background: rgba(30, 10, 40, 0.85);
     font-family: Ubuntu, sans-serif;
     color: #fff;
+}
+
+.main {
+    max-width: 50em;
+    width: 90%;
+    margin: auto;
+    height: calc(100vh - 5em);
+    margin-top: 2.5em;
+}
+
+.paste {
+    width: 100%;
+
+    border-radius: 2em;
+    font-size: 1.3em;
+    padding: 1em 2em;
+    resize: none;
+
+    border: none;
+    outline: none;
+
+    font-family: monospace;
+}
+
+.name-container {
+    text-align: center;
+    padding: 0.5em 0;
+}
+
+.name {
+    font-weight: bold;
+    color: rgb(255, 158, 78);
+    cursor: pointer;
 }

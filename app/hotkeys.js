@@ -1,6 +1,6 @@
 const iohook = require('iohook');
 
-module.exports = (globals) => {
+module.exports = (globals, showWindow) => {
     let rshift = false;
     let rctrl = false;
     let nkey = false;
@@ -30,8 +30,7 @@ module.exports = (globals) => {
 
             setTimeout(() => {
                 if (rshift && rctrl && !nkey) {
-                    globals.window.show();
-                    globals.window.focus();
+                    showWindow();
                 }
             }, 400);
         }
