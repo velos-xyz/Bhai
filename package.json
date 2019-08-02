@@ -1,0 +1,33 @@
+{
+  "name": "bhai",
+  "version": "0.1.0",
+  "description": "Sharing for when even slack is too slow.",
+  "main": "main.js",
+  "author": "Omran Jamal <o,jamal97@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron --enable-transparent-visuals --disable-gpu ."
+  },
+  "dependencies": {
+    "electron": "^6.0.0",
+    "iohook": "^0.6.1",
+    "ipaddr.js": "^1.9.1",
+    "node-abi": "^2.10.0"
+  },
+  "iohook": {
+    "targets": [
+      "node-72",
+      "electron-73"
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "arches": [
+      "x64"
+    ]
+  },
+  "cmake-js": {
+    "runtime": "electron",
+    "runtimeVersion": "6.0.0"
+  }
+}
